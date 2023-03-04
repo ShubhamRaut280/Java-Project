@@ -1,12 +1,12 @@
 import java.io.*;
 import java.net.*;
 
-public class ClientCopy {
+public class Client {
 
     Socket socket;
     BufferedReader br;          // for reading data
     PrintWriter out;            // for writing data
-    public ClientCopy(){
+    public Client(){
     try {
         System.out.println("Sending request to Server..");
         Socket socket = new Socket("127.0.0.1", 7777); //[ ip and port ]
@@ -77,7 +77,7 @@ public class ClientCopy {
 
     public static void main(String[] args) {
         System.out.println("this is client.");
-        new ClientCopy();
+        new Client();
 
     }
 }
