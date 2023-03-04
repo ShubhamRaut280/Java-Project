@@ -1,14 +1,12 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
+import java.io.*;
+import java.net.*;
 
-public class Client {
+public class ClientCopy {
 
     Socket socket;
     BufferedReader br;          // for reading data
     PrintWriter out;            // for writing data
-    public Client(){
+    public ClientCopy(){
     try {
         System.out.println("Sending request to Server..");
         Socket socket = new Socket("127.0.0.1", 7777); //[ ip and port ]
@@ -79,7 +77,7 @@ public class Client {
 
     public static void main(String[] args) {
         System.out.println("this is client.");
-        new Client();
+        new ClientCopy();
 
     }
 }

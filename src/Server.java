@@ -38,20 +38,20 @@ public class Server {
         // Thread will read and give the data
         Runnable r1 = ()->{
             System.out.println("Reader Started. ");
-            while(true)
+            try {while(true)
             {
-                try {
+
                     String msg = br.readLine();     // it will come from client in case of server and viseversa
                     if (msg.equals("exit")) {
                         System.out.println("Client terminated the chat.");
+                        socket.close();
                         break;
                     }
                     System.out.println("Client: " + msg);
-                }catch(Exception e)
-                {
-                    e.printStackTrace();
-                }
-            }
+
+            } }catch(Exception e)
+            {
+                System.out.println("Connection is closed!");            }
         };
         // creating objects of thread
         new Thread(r1).start();
@@ -63,17 +63,22 @@ public class Server {
         // Thread will take data from user and will send it to the client
         Runnable r2 = () -> {
             System.out.println("Writer Started.");
-            while(true) {
-                try {
+                try {while( !socket.isClosed()) {
+
                     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));  // taking input from console
                     String content = br.readLine();
                     out.println(content);
                     out.flush();
 
-                } catch (Exception e) {
-                    e.printStackTrace();
+                if(content.equals("exit"))
+                {
+                    socket.close();
+                    break;
                 }
-            }
+
+                }
+            }catch (Exception e) {
+                System.out.println("Connection is closed!");            }
 
         };
         new Thread(r2).start();
